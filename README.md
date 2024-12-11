@@ -1,66 +1,108 @@
-# Phase 1 Report: Dataset Generation for Email Classification
+# Project Report: Email Classification
 
 ## Project Overview
 
-In this phase, we aimed to build a Python-based pipeline to generate a labeled dataset of emails. The primary objective
-was to utilize the OpenAI API to generate a dataset of 2,000 emails, evenly labeled as “spam” and “non-spam.” This
-dataset will serve as the foundation for future email classification tasks.
+This project focuses on developing a comprehensive pipeline for email classification. The aim is to generate a
+high-quality labeled dataset of emails and use it to train and evaluate machine learning models. The project consists of
+two major phases: **Dataset Generation** and **Model Training**. This report documents the progress, methodologies, and
+outcomes of the first phase (Dataset Generation) and sets the foundation for subsequent phases.
 
-## Key Features of the Code
+---
 
-The code is structured around the DatasetHandler class, which handles dataset generation, storage, and management.
-Below, we break down the main features:
+## Phase 1: Dataset Generation
 
-### 1. Dataset Generation
+The primary goal of this phase was to build a Python-based pipeline to generate a labeled dataset of emails. This
+dataset serves as the foundation for the classification tasks in the next phase.
 
-The DatasetHandler class initializes with parameters such as the API key, the number of samples, batch size, and file
-paths. It also ensures the specified output directory exists.
+### Key Components
 
+#### 1. DatasetHandler Class
 
-### 2. Batch Email Generation
+The core of the pipeline is the `DatasetHandler` class, which manages dataset generation, storage, and management. It is
+designed with modularity and robustness in mind to ensure ease of future scalability.
 
-The `generate_emails_batch` function sends a prompt to the OpenAI API, requesting a batch of emails. Each email is assigned a random label (“spam” or “non-spam”) and contains 2-3 sentences. The function then processes the API response and returns a list of email objects.
+#### 2. Email Generation
 
-### 3. Data Storage
-The `append_to_file` function handles saving the generated emails to a JSON file. It ensures that new data is appended to the file if it already exists, or creates a new file if not. This ensures no data is lost, even if the process is interrupted.
+The `generate_emails_batch` function leverages AI APIs to generate email samples. Each email is randomly labeled as
+“spam” or “non-spam” and contains concise content (2-3 sentences).
 
-### 4. Dataset Creation
-The `create_dataset` function orchestrates the entire dataset generation process. It breaks the dataset into batches, generates the specified number of emails, and appends them to the file. If there are any remaining emails to generate (less than a full batch), it handles them at the end.
+#### 3. Data Storage
 
-### Example Usage
+The `append_to_file` function handles saving emails in a JSON format. It ensures data integrity by appending new data to
+existing files or creating new ones when necessary.
+
+#### 4. Dataset Creation Workflow
+
+The `create_dataset` function orchestrates the email generation process in batches. It ensures that the exact number of
+required samples is generated efficiently, even handling residual emails if they do not fit into a full batch.
+
+### Example Usage of the Code
 
 ```python
 if __name__ == "__main__":
-    dataset_handler = DatasetHandler(os.getenv("OPEN_AI_API_KEY"), 'data', 'dataset.json', 2000, 25)
+    dataset_handler = DatasetHandler(os.getenv("OPEN_AI_API_KEY"), 'data', 'dataset.json', 20000, 50)
     dataset_handler.create_dataset()
 ```
-## Progress Achieved
+---
 
-### Completed Tasks:
-- Implemented the `DatasetHandler` class to generate and store labeled emails.
-- Successfully generated and saved a dataset of 2,000 emails using OpenAI’s API.
-- Implemented error handling for robust dataset creation.
+### Dataset Expansion
 
-### Output Example:
+To enhance the dataset for better performance during model training, we expanded the initial dataset of 2,000 records to
+12,000 records. This was achieved by incorporating additional records generated using different AI tools:
+
+1. **OpenAI API:** Initially generated 20,000 labeled email samples.
+2. **Claude.ai:** Used a custom prompt to generate 5,000 additional records with diverse content.
+3. **Gemini:** Created 5,000 records using a slightly modified prompt to ensure variation.
+
+#### Prompts Used for Email Generation
+
+- **Claude.ai Prompt:**
+
+```text
+"Generate diverse email records labeled as 'spam' or 'non-spam.' Include 2-3 sentences per email. Spam emails should mimic marketing content or scams, while non-spam emails should resemble personal or professional communication. Ensure unique and varied content for each email."
+```
+
+- **Gemini Prompt:**
+
+```text
+  "Create labeled email records, equally divided into 'spam' and 'non-spam.' Spam emails should focus on promotions, scams, or phishing attempts, and non-spam emails should include everyday messages like meeting notes or family updates. Keep the content concise (2-3 sentences) and avoid repetition."
+```
+
+---
+
+### Achievements in Phase 1
+
+- **Pipeline Development:** Successfully implemented the `DatasetHandler` class to handle dataset creation and
+  management.
+- **Initial Dataset Generation:** Created a labeled dataset of 20,000 emails using the OpenAI API.
+- **Dataset Expansion:** Expanded the dataset to 30,000 emails using Claude.ai and Gemini, ensuring diversity and
+  robustness.
+
+#### Sample Output
 
 ```json
 [
-    {
-        "label": "spam",
-        "text": "Congratulations! You've won a free trip. Click here to claim your prize now."
-    },
-    {
-        "label": "non-spam",
-        "text": "Hi John, can we reschedule our meeting for next week?"
-    }
+  {
+    "label": "spam",
+    "text": "Congratulations! You've won a free trip. Click here to claim your prize now. Hurry, this offer won't last long!"
+  },
+  {
+    "label": "non-spam",
+    "text": "Hi John, can we reschedule our meeting for next week? I have a conflict on Monday."
+  }
 ]
 ```
 
-## Next Steps
+### Next Step
 
-In the upcoming phase, we plan to focus on the following tasks:
-- Validate the dataset for consistency and quality.
-- lore potential preprocessing tasks for the dataset.
-- n for phase two, which involves training and evaluating machine learning models using this dataset.
+## Phase 2: Model Training and Evaluation
 
+In the next phase, we will utilize the generated dataset to develop and evaluate machine learning models for email
+classification. Key activities will include:
 
+- Preprocessing the dataset for consistency and quality.
+- Selecting and training machine learning models.
+- Evaluating model performance using standard metrics.
+- Iterating on the model to achieve optimal results.
+
+This document will be updated as the project progresses, including results and insights from subsequent phases.

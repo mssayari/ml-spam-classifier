@@ -41,7 +41,7 @@ class DatasetHandler:
         prompt = (
             f"Generate {batch_size} emails in JSON format. Each email should have a 'label' "
             f"(either 'spam' or 'non-spam') and 'text'. Use the following labels: {labels}. "
-            "Each email should be 2-3 sentences long."
+            "Each email should be unique and contain at least 3 sentences."
         )
 
         try:
@@ -120,5 +120,5 @@ class DatasetHandler:
 
 # Example usage
 if __name__ == "__main__":
-    dataset_handler = DatasetHandler(os.getenv("OPEN_AI_API_KEY"), 'data', 'dataset.json', 2000, 25)
+    dataset_handler = DatasetHandler(os.getenv("OPEN_AI_API_KEY"), 'data', 'dataset.json', 20000, 50)
     dataset_handler.create_dataset()

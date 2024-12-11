@@ -47,8 +47,8 @@ if __name__ == "__main__":
 
 ### Dataset Expansion
 
-To enhance the dataset for better performance during model training, we expanded the initial dataset of 2,000 records to
-12,000 records. This was achieved by incorporating additional records generated using different AI tools:
+To enhance the dataset for better performance during model training, we expanded the initial dataset of 20,000 records to
+30,000 records. This was achieved by incorporating additional records generated using different AI tools:
 
 1. **OpenAI API:** Initially generated 20,000 labeled email samples.
 2. **Claude.ai:** Used a custom prompt to generate 5,000 additional records with diverse content.

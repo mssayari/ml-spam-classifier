@@ -89,6 +89,14 @@ To enhance the dataset for better performance during model training, we expanded
   {
     "label": "non-spam",
     "text": "Hi John, can we reschedule our meeting for next week? I have a conflict on Monday."
+  },
+  {
+    "label": "non-spam",
+    "text": "We're updating our company's health insurance policy for the upcoming year. Please review the attached documents and submit any questions or concerns before the open enrollment period begins."
+  },
+  {
+    "label": "spam",
+    "text": "Congratulations! You've been selected for an EXCLUSIVE once-in-a-lifetime opportunity to earn millions from home! Click now to claim your GUARANTEED CASH PRIZE!!!"
   }
 ]
 ```

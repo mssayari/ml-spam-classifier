@@ -10,7 +10,7 @@ load_dotenv()
 
 
 class DatasetHandler:
-    def __init__(self, api_key, output_dir="data", output_file="dataset.json", num_samples=2000, batch_size=20):
+    def __init__(self, api_key, output_dir, output_file, num_samples=2000, batch_size=20):
         """
         Initialize the DatasetHandler.
 
@@ -120,5 +120,11 @@ class DatasetHandler:
 
 # Example usage
 if __name__ == "__main__":
-    dataset_handler = DatasetHandler(os.getenv("OPEN_AI_API_KEY"), 'data', 'dataset.json', 20000, 50)
+    dataset_handler = DatasetHandler(
+        os.getenv("OPEN_AI_API_KEY"),
+        os.getenv("DATA_DIR"),
+        'ai_dataset.json',
+        20000,
+        50
+    )
     dataset_handler.create_dataset()

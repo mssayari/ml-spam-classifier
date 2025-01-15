@@ -219,26 +219,25 @@ class ModelTrainer:
         """
 
         # Load and preprocess the first dataset
-        # self.load_dataset(file_name="ai_dataset.json", file_type="json")
-        # self.preprocess()
-        # self.train_and_evaluate_models("ai_dataset")
+        self.load_dataset(file_name="ai_dataset.json", file_type="json")
+        self.preprocess()
+        self.train_and_evaluate_models("ai_dataset")
 
-        # Load and preprocess the second dataset
         # Load and preprocess the second dataset
         self.load_dataset(file_name="completeSpamAssassin.csv", file_type="csv")
         self.preprocess()
         self.train_and_evaluate_models("completeSpamAssassin")
 
         # Combine datasets
-        # self.load_dataset(file_name="ai_dataset.json", file_type="json")
-        # df1 = pd.DataFrame({"email": self.X, "label": self.y})
-        # self.load_dataset(file_name="completeSpamAssassin.csv", file_type="csv")
-        # df2 = pd.DataFrame({"email": self.X, "label": self.y})
-        # combined_df = pd.concat([df1, df2], ignore_index=True)
-        # self.X = combined_df['email']
-        # self.y = combined_df['label']
-        # self.preprocess()
-        # self.train_and_evaluate_models("combined_dataset")
+        self.load_dataset(file_name="ai_dataset.json", file_type="json")
+        df1 = pd.DataFrame({"email": self.X, "label": self.y})
+        self.load_dataset(file_name="completeSpamAssassin.csv", file_type="csv")
+        df2 = pd.DataFrame({"email": self.X, "label": self.y})
+        combined_df = pd.concat([df1, df2], ignore_index=True)
+        self.X = combined_df['email']
+        self.y = combined_df['label']
+        self.preprocess()
+        self.train_and_evaluate_models("combined_dataset")
 
     def train_and_evaluate_models(self, dataset_name):
         """

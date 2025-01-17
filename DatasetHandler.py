@@ -75,7 +75,15 @@ class DatasetHandler:
                 temperature=0.7
             )
             response = response.choices[0].message.content
-            return json.loads(response)["emails"]
+
+            json_response = json.loads(response)
+
+            if "emails" in json_response:
+                return json_response["emails"]
+            elif "items" in json_response:
+                return json_response["items"]
+            elif "properties" in json_response:
+                return json_response['properties']
 
         except Exception as e:
             print(f"Error generating batch emails: {e}")
